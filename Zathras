@@ -1,0 +1,82 @@
+import math
+
+n = input()
+
+i = 0
+A_result = []
+B_result = []
+
+for i in range(0, int(n)):
+    value = input()
+    value_A = value.replace(" ", "-")
+    dash = value_A.find("-")
+    A = value_A[:int(dash)]
+
+    B_0 = int(dash)+1
+    value_B0 = value_A[int(B_0):]
+    value_B = value_B0.replace("-", "--") 
+    B_dash = value_B.find("--")
+    B = value_B[:int(B_dash)]
+
+    alph_0 = int(B_dash)+2
+    value_alph0 = value_B[int(alph_0):]
+    value_alph = value_alph0.replace("--", "-") 
+    alph_dash = value_alph.find("-")
+    alph = value_alph[:int(alph_dash)]
+
+    beta_0 = int(alph_dash)+1
+    value_beta0 = value_alph[int(beta_0):]
+    value_beta = value_beta0.replace("-", "--") 
+    beta_dash = value_beta.find("--")
+    beta = value_beta[:int(beta_dash)]
+
+    Y_0 = int(beta_dash)+2
+    value_Y0 = value_beta[int(Y_0):]
+    value_Y = value_Y0.replace("--", "-") 
+    Y_dash = value_Y.find("-")
+    Y = value_Y
+    
+    nr_couples = min(A, B)
+    bab = 0.02*int(nr_couples)
+    babies = math.floor(bab)
+
+    alph_p = float(int(alph)/100)
+    beta_p = float(int(beta)/100)
+
+    baby_a0 = (float(alph_p))*float(babies)
+    baby_a = math.floor(baby_a0)
+
+    baby_b0 = (float(beta_p))*float(babies)
+    baby_b = math.floor(baby_b0)
+
+    rest = float(babies) - float(baby_a) - float(baby_b)
+
+    if (int(rest)%2==0):
+        a = float(baby_a) + (float(rest)/2)
+        b = float(baby_b) + (float(rest)/2)
+    if (int(rest)%2==1):
+        r = float(rest) - 1
+        a = float(baby_a) + (float(r)/2)
+        b = float(baby_b) + (float(r)/2) + 1
+
+    print(Y)
+    dead_a = float(A)/100
+    dead_b = float(B)/100
+
+    a_year = (float(a) - float(dead_a)) 
+    b_year = (float(b) - float(dead_b)) 
+
+    total_a = int(A) + (int(a_year)*int(Y))
+    total_b = int(B) + (int(b_year)*int(Y))
+
+    A_result.append(total_a)
+    B_result.append(total_b)
+
+    last_case = int(n)-1
+    if int(i) == int(last_case):
+        for l in range(0, int(n)):
+            case_nr = int(l)+1
+            print("Case #" + str(case_nr) + ": " + str(A_result[l]) + " " + str(B_result[l]))
+            l + 1
+                
+
